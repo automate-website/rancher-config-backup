@@ -29,7 +29,7 @@ public class VersionControlService {
     @Autowired
     public VersionControlService(ConfigBackupProps props){
         this.props = props;
-        this.credentialsProvider = new UsernamePasswordCredentialsProvider(props.getGitUserName(), props.getGitPassword());
+        this.credentialsProvider = new UsernamePasswordCredentialsProvider(props.getGitUser(), props.getGitPassword());
     }
 
     public File getRepositoryDir(){

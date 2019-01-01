@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties
 public class ConfigBackupProps {
 
-    private String gitUserName;
+    private String gitUser;
 
     private String gitPassword;
 
@@ -29,12 +29,12 @@ public class ConfigBackupProps {
 
     private String rancherAccountKey;
 
-    public String getGitUserName() {
-        return gitUserName;
+    public String getGitUser() {
+        return gitUser;
     }
 
-    public void setGitUserName(String gitUserName) {
-        this.gitUserName = gitUserName;
+    public void setGitUser(String gitUser) {
+        this.gitUser = gitUser;
     }
 
     public String getGitPassword() {

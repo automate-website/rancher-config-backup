@@ -6,3 +6,5 @@ security:
 git-file-pattern: '.'
 git-author-name: rancher-config-backup
 git-author-email: noreply@automate.website
+git-repository-name: default
+git-repository-branch: master
