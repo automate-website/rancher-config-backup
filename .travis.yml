@@ -1,7 +1,17 @@
-jdk:
-  - openjdk8
-script: mvn clean verify
-before_install:
-- pip install --user codecov
+language: java
+sudo: required
+
+cache:
+  directories:
+    - $HOME/.m2
+
+services:
+  - docker
+
+script:
+  - mvn clean verify -DskipTests=true
+  - docker build . -t automatewebsite/rancher-config-backup
+
 after_success:
-- codecov
+  - bash <(curl -s https://codecov.io/bash)
+  - .travis/deploy-image.sh
