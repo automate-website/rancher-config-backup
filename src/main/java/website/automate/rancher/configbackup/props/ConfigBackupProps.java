@@ -11,7 +11,7 @@ public class ConfigBackupProps {
 
     private String gitPassword;
 
-    private String gitRepositoryUrl;;
+    private String gitRepositoryUrl;
 
     private String gitRepositoryName;
 
