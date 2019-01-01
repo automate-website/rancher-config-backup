@@ -1,0 +1,7 @@
+jdk:
+  - openjdk8
+script: mvn clean verify
+before_install:
+- pip install --user codecov
+after_success:
+- codecov

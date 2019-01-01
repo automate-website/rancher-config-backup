@@ -1,0 +1,6 @@
+security:
+  user:
+    name: admin
+    password: secret
+
+git-file-pattern: '.'
