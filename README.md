@@ -14,7 +14,7 @@ Supports Rancher `1.6.x`.
 ### On Demand
 ```
 docker run --rm \
--e "RANCHER_BASE_URL=https://rancher.local" \
+-e "RANCHER_BASE_URL=https://rancher.local/v2-beta" \
 -e "RANCHER_ACCOUNT_KEY=FOO" \
 -e "RANCHER_SECRET_KEY=BAR" \
 -e "GIT_REPOSITORY_URL=https://git.local" \
