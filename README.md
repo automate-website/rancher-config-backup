@@ -7,6 +7,8 @@
 
 Retrieves and stores rancher stack configurations within a git repository for any accessible environments. May be used to backup the stack configurations periodically. 
 
+Supports Rancher `1.6.x`.
+
 ## Usage
 
 ### On Demand
