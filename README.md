@@ -5,10 +5,11 @@
 ![Docker Automated build](https://img.shields.io/docker/automated/automatewebsite/rancher-config-backup.svg)
 [![Docker Hub](https://img.shields.io/docker/pulls/automatewebsite/rancher-config-backup.svg)](https://hub.docker.com/r/automatewebsite/rancher-config-backup) 
 
-Creates a backup of all rancher stack configs for accessible environments to a git repository.
+Retrieves and stores rancher stack configurations within a git repository for any accessible environments. May be used to backup the stack configurations periodically. 
 
 ## Usage
 
+### On Demand
 ```
 docker run --rm \
 -e "RANCHER_BASE_URL=https://rancher.local" \
@@ -21,6 +22,35 @@ automatewebsite/rancher-config-backup
 ```
 
 Note: Rancher user for which the token is issued must have at least `restricted` (`read` is not enough) access to the desired project a.k.a. environment. 
+
+### Periodical
+
+Below is a GitLab-CI configuration (`.gitlab-ci.yml`) to perform scheduled backups:
+
+```
+image: docker:latest
+
+services:
+  - docker:dind
+
+build:
+  stage: build
+  script:
+    - |
+      docker run --rm \
+        -e "RANCHER_BASE_URL=$RANCHER_BASE_URL" \
+        -e "RANCHER_ACCOUNT_KEY=$RANCHER_ACCOUNT_KEY" \
+        -e "RANCHER_SECRET_KEY=$RANCHER_SECRET_KEY" \
+        -e "GIT_REPOSITORY_URL=$GIT_REPOSITORY_URL" \
+        -e "GIT_USER=$GIT_USER" \
+        -e "GIT_PASSWORD=$GIT_PASSWORD" \
+        automatewebsite/rancher-config-backup:latest
+  only:
+    - schedules
+```
+
+Note: Related environment variables must be configured at the project/group level as well as the desired schedule
+(e.g. once a day).
 
 ## Created Repository Structure
 
