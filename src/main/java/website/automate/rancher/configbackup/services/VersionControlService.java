@@ -1,5 +1,9 @@
 package website.automate.rancher.configbackup.services;
 
+import org.eclipse.jgit.transport.PushResult;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import website.automate.rancher.configbackup.props.ConfigBackupProps;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
@@ -17,6 +21,8 @@ import static java.text.MessageFormat.format;
 
 @Service
 public class VersionControlService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(VersionControlService.class);
 
     private ConfigBackupProps props;
 
@@ -82,12 +88,28 @@ public class VersionControlService {
 
     private void push(){
         try {
-            git.push()
+            RemoteRefUpdate remoteRefUpdate = getRemoteUpdate(git.push()
                     .setCredentialsProvider(credentialsProvider)
-                    .add(props.getGitRepositoryBranch()).call();
+                    .add(props.getGitRepositoryBranch()).call());
+
+            failIfRemoteRefStatusNotOk(remoteRefUpdate);
         } catch (Exception e){
-            throw new RuntimeException(format("Failed to push to the repository {0}.", props.getGitRepositoryUrl()), e);
+            throw new RuntimeException(format("Failed to push to the repository \"{0}\".", props.getGitRepositoryUrl()), e);
         }
+    }
+
+    private void failIfRemoteRefStatusNotOk(RemoteRefUpdate remoteRefUpdate){
+        RemoteRefUpdate.Status remoteRefUpdateStatus = remoteRefUpdate.getStatus();
+        if(remoteRefUpdateStatus != RemoteRefUpdate.Status.OK){
+            throw new RuntimeException(format("Failed to push to remote repository \"{0}\" with status \"{1}\". Check repository permissions/protected branches.",
+                    props.getGitRepositoryUrl(),
+                    remoteRefUpdateStatus));
+        }
+    }
+
+    private RemoteRefUpdate getRemoteUpdate(Iterable<PushResult> results){
+        PushResult pushResult = results.iterator().next();
+        return pushResult.getRemoteUpdates().iterator().next();
     }
 
     private PersonIdent createAuthor(){

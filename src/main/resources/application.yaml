@@ -1,7 +1,11 @@
-security:
-  user:
-    name: admin
-    password: secret
+spring.main.banner-mode: "OFF"
+
+logging:
+  pattern:
+    console: "%d %-5level : %msg%n"
+  level:
+    ROOT: ERROR
+    website.automate.rancher.configbackup.services: INFO
 
 git-file-pattern: '.'
 git-author-name: rancher-config-backup
