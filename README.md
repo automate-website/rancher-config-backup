@@ -5,13 +5,22 @@
 ![Docker Automated build](https://img.shields.io/docker/automated/automatewebsite/rancher-config-backup.svg)
 [![Docker Hub](https://img.shields.io/docker/pulls/automatewebsite/rancher-config-backup.svg)](https://hub.docker.com/r/automatewebsite/rancher-config-backup) 
 
-Provides a tool to backup rancher stack configs to a git repository.
+Backups all rancher stack configs to a git repository.
 
 ## Usage
 
 ```
-TBD.
+docker run --rm \
+-e "RANCHER_BASE_URL=https://rancher.local" \
+-e "RANCHER_ACCOUNT_KEY=FOO" \
+-e "RANCHER_SECRET_KEY=BAR" \
+-e "GIT_REPOSITORY_URL=https://git.local" \
+-e "GIT_USER=foo" \
+-e "GIT_PASSWORD=bar" \
+automatewebsite/rancher-config-backup
 ```
+
+Note: Rancher user for which the token is issued must have at least `restricted` (`read` is not enough) access to the desired project a.k.a. environment. 
 
 ## License
 
