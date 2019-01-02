@@ -5,7 +5,7 @@
 ![Docker Automated build](https://img.shields.io/docker/automated/automatewebsite/rancher-config-backup.svg)
 [![Docker Hub](https://img.shields.io/docker/pulls/automatewebsite/rancher-config-backup.svg)](https://hub.docker.com/r/automatewebsite/rancher-config-backup) 
 
-Retrieves and stores rancher stack configurations within a git repository for any accessible environments. May be used to backup the stack configurations periodically. 
+Retrieves and stores Rancher stack configurations within a git repository for any accessible environments. May be used to backup the stack configurations periodically. 
 
 Supports Rancher `1.6.x`.
 
