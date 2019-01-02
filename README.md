@@ -25,7 +25,7 @@ Note: Rancher user for which the token is issued must have at least `restricted`
 
 ### Periodical
 
-Below is a GitLab-CI configuration (`.gitlab-ci.yml`) to perform scheduled backups:
+Below is an example GitLab-CI configuration (`.gitlab-ci.yml`) to perform scheduled backups:
 
 ```
 image: docker:latest
