@@ -76,16 +76,6 @@ public class VersionControlService {
         }
     }
 
-    private void pull(){
-        try {
-            git.pull()
-                    .setCredentialsProvider(credentialsProvider)
-                    .setRemoteBranchName(props.getGitRepositoryBranch()).call();
-        } catch (Exception e){
-            throw new RuntimeException(format("Failed to pull from the repository {0}.", props.getGitRepositoryUrl()), e);
-        }
-    }
-
     private void push(){
         try {
             RemoteRefUpdate remoteRefUpdate = getRemoteUpdate(git.push()

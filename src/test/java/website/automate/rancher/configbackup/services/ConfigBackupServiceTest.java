@@ -1,0 +1,78 @@
+package website.automate.rancher.configbackup.services;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import website.automate.rancher.configbackup.props.ConfigBackupProps;
+import website.automate.rancher.configbackup.services.models.Entity;
+import website.automate.rancher.configbackup.services.models.StackConfig;
+
+import java.util.Collections;
+
+import static java.util.Collections.singletonList;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
+public class ConfigBackupServiceTest {
+
+    private static final String GIT_REPOSITORY_URL = "https://git.local";
+
+    private static final String PROJECT_ID = "p1";
+
+    private static final String PROJECT_NAME = "project";
+
+    private static final String STACK_NAME = "stack";
+
+    @Rule
+    public TemporaryFolder temporaryFolder = new TemporaryFolder();
+
+    @Mock
+    private Entity project;
+
+    @Mock
+    private Entity stack;
+
+    @Mock
+    private StackConfig config;
+
+    @Mock
+    private RancherDataService rancherDataService;
+
+    @Mock
+    private VersionControlService versionControlService;
+
+    @Mock
+    private ConfigBackupProps props;
+
+    @InjectMocks
+    private ConfigBackupService configBackupService;
+
+    @Test
+    public void backup() {
+        when(props.getGitRepositoryUrl()).thenReturn(GIT_REPOSITORY_URL);
+        when(versionControlService.getRepositoryDir()).thenReturn(temporaryFolder.getRoot().getAbsoluteFile());
+        when(project.getId()).thenReturn(PROJECT_ID);
+        when(project.getName()).thenReturn(PROJECT_NAME);
+        when(stack.getName()).thenReturn(STACK_NAME);
+        when(config.getProject()).thenReturn(project);
+        when(config.getStack()).thenReturn(stack);
+        when(rancherDataService.getProjects()).thenReturn(singletonList(project));
+        when(rancherDataService.getStacks(PROJECT_ID)).thenReturn(singletonList(stack));
+        when(rancherDataService.getConfig(project, stack)).thenReturn(config);
+        when(versionControlService.isClean()).thenReturn(false);
+
+        configBackupService.backup();
+
+        verify(versionControlService).addCommitAndPush("Update rancher stack configs.");
+    }
+
+}

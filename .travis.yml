@@ -9,7 +9,7 @@ services:
   - docker
 
 script:
-  - mvn clean verify -DskipTests=true
+  - mvn clean verify
   - docker build . -t automatewebsite/rancher-config-backup
 
 after_success:

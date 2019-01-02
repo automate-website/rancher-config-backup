@@ -1,0 +1,20 @@
+spring.main.banner-mode: "OFF"
+
+logging:
+  pattern:
+    console: "%d %-5level : %msg%n"
+  level:
+    ROOT: ERROR
+    website.automate.rancher.configbackup.services: INFO
+
+git-file-pattern: '.'
+git-author-name: rancher-config-backup
+git-author-email: noreply@automate.website
+git-repository-name: default
+git-repository-branch: master
+git-repository-url: https://git.local
+git-user: git-admin
+git-password: git-secret
+rancher-base-url: http://localhost:8080/v2
+rancher-account-key: rancher-admin
+rancher-secret-key: rancher-secret

@@ -1,0 +1,4 @@
+{
+  "dockerComposeConfig": "version: '2'\r\n",
+  "rancherComposeConfig": "version: '2'\r\n"
+}
