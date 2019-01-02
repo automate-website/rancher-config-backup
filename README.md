@@ -51,4 +51,4 @@ foo/
 
 ## License
 
-See the [LICENSE](https://github.com/automate-website/rancher-config-backup/LICENSE) file for details.
+See the [LICENSE](https://github.com/automate-website/rancher-config-backup/blob/master/LICENSE) file for details.
