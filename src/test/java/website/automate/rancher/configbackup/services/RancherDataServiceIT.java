@@ -1,13 +1,7 @@
 package website.automate.rancher.configbackup.services;
 
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
-import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-
-import org.mockito.Mock;
-import website.automate.rancher.configbackup.services.models.Entity;
-import website.automate.rancher.configbackup.services.models.StackConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import website.automate.rancher.configbackup.services.models.Entity;
+import website.automate.rancher.configbackup.services.models.StackConfig;
 
 import java.util.List;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;

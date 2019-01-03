@@ -6,8 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import website.automate.rancher.configbackup.services.ConfigBackupService;
 
-import javax.annotation.PostConstruct;
-
 @SpringBootApplication
 public class ConfigBackupApplication implements CommandLineRunner {
 

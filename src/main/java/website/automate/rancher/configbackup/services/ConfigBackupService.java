@@ -1,15 +1,13 @@
 package website.automate.rancher.configbackup.services;
 
-import org.eclipse.jgit.util.StringUtils;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import website.automate.rancher.configbackup.props.ConfigBackupProps;
 import website.automate.rancher.configbackup.services.models.Entity;
 import website.automate.rancher.configbackup.services.models.StackConfig;
-import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

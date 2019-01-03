@@ -1,17 +1,17 @@
 package website.automate.rancher.configbackup.services;
 
-import org.eclipse.jgit.transport.PushResult;
-import org.eclipse.jgit.transport.RemoteRefUpdate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import website.automate.rancher.configbackup.props.ConfigBackupProps;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.PushResult;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import website.automate.rancher.configbackup.props.ConfigBackupProps;
 
 import javax.annotation.PostConstruct;
 import java.io.File;

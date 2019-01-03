@@ -6,16 +6,10 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import website.automate.rancher.configbackup.props.ConfigBackupProps;
 import website.automate.rancher.configbackup.services.models.Entity;
 import website.automate.rancher.configbackup.services.models.StackConfig;
-
-import java.util.Collections;
 
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.verify;
