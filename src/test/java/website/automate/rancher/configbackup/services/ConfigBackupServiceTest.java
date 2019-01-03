@@ -26,14 +26,6 @@ public class ConfigBackupServiceTest {
 
     private static final String STACK_NAME = "stack";
 
-    private static final String DOCKER_COMPOSE_CONTENT = "foo";
-
-    private static final String RANCHER_COMPOSE_CONTENT = "bar";
-
-    private static final String DOCKER_COMPOSE_CONTENT_ENCRYPTED = "<foo>";
-
-    private static final String RANCHER_COMPOSE_CONTENT_ENCRYPTED = "<bar>";
-
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
@@ -74,8 +66,6 @@ public class ConfigBackupServiceTest {
         when(rancherDataService.getStacks(PROJECT_ID)).thenReturn(singletonList(stack));
         when(rancherDataService.getConfig(project, stack)).thenReturn(config);
         when(versionControlService.isClean()).thenReturn(false);
-        when(configEncryptionService.encryptSecrets(DOCKER_COMPOSE_CONTENT)).thenReturn(DOCKER_COMPOSE_CONTENT_ENCRYPTED);
-        when(configEncryptionService.encryptSecrets(RANCHER_COMPOSE_CONTENT)).thenReturn(RANCHER_COMPOSE_CONTENT_ENCRYPTED);
 
         configBackupService.backup();
 
