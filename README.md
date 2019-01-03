@@ -51,6 +51,9 @@ build:
     - schedules
 ```
 
+Note: Related environment variables must be configured at the project/group level as well as the desired schedule
+(e.g. once a day).
+
 ## Encryption
 
 If `ENCRYPT_PASSWORD` is set, all values with keys matching `ENCRYPT_KEY_PATTERN` are encrypted.
@@ -61,10 +64,6 @@ Values may be decrypted using [spring-cloud-cli](https://cloud.spring.io/spring-
  spring decrypt <ecnrypted secret> --key <password>
 
 ```
-
-
-Note: Related environment variables must be configured at the project/group level as well as the desired schedule
-(e.g. once a day).
 
 ## Created Repository Structure
 
