@@ -95,7 +95,7 @@ foo/
 |ENCRYPT_KEY_PATTERN|Pattern matching the keys with values that require encryption.| `<expression>`|
 
 
- `<expression>` - `(?i).*(password\|secret\|pass).*`
+ `<expression>` - `(?i).*(password|secret|pass).*`
 
 ## License
 
