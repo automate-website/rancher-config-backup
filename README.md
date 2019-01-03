@@ -51,6 +51,18 @@ build:
     - schedules
 ```
 
+## Encryption
+
+If `ENCRYPT_PASSWORD` is set, all values with keys matching `ENCRYPT_KEY_PATTERN` are encrypted.
+
+Values may be decrypted using [spring-cloud-cli](https://cloud.spring.io/spring-cloud-cli):
+
+```
+ spring decrypt <ecnrypted secret> --key <password>
+
+```
+
+
 Note: Related environment variables must be configured at the project/group level as well as the desired schedule
 (e.g. once a day).
 
@@ -79,7 +91,12 @@ foo/
 |GIT_AUTHOR_NAME|Git author name..|`rancher-config-backup`|
 |GIT_AUTHOR_EMAIL|Git author email.|`noreply@automate.website`|
 |GIT_REPOSITORY_NAME|Git repository name, utilized for logging only.|`default`|
+|ENCRYPT_SALT|Encryption salt.|`deadbeef`|
+|ENCRYPT_PASSWORD|Password utilized for secret encryption.|`null`|
+|ENCRYPT_KEY_PATTERN|Pattern matching the keys with values that require encryption.| `<expression>`|
 
+
+ `<expression>` - `(?i).*(password\|secret\|pass).*`
 
 ## License
 

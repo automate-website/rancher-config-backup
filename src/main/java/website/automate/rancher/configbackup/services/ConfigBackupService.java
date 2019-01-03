@@ -1,7 +1,9 @@
 package website.automate.rancher.configbackup.services;
 
+import org.eclipse.jgit.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Lazy;
 import website.automate.rancher.configbackup.props.ConfigBackupProps;
 import website.automate.rancher.configbackup.services.models.Entity;
 import website.automate.rancher.configbackup.services.models.StackConfig;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 import static java.text.MessageFormat.format;
+import static org.eclipse.jgit.util.StringUtils.isEmptyOrNull;
 
 @Service
 public class ConfigBackupService {
@@ -23,14 +26,18 @@ public class ConfigBackupService {
 
     private RancherDataService rancherDataService;
 
+    private ConfigEncryptionService configEncryptionService;
+
     private ConfigBackupProps props;
 
     @Autowired
     public ConfigBackupService(VersionControlService versionControlService,
                                RancherDataService rancherDataService,
-                               ConfigBackupProps props){
+                               ConfigBackupProps props,
+                               ConfigEncryptionService configEncryptionService){
         this.versionControlService = versionControlService;
         this.rancherDataService = rancherDataService;
+        this.configEncryptionService = configEncryptionService;
         this.props = props;
     }
 
@@ -67,8 +74,15 @@ public class ConfigBackupService {
         File dockerCompose = createFilePath(projectName, stackName, "docker-compose.yaml");
         File rancherCompose = createFilePath(projectName, stackName, "rancher-compose.yaml");
 
-        writeToFile(dockerCompose, stackConfig.getDockerCompose());
-        writeToFile(rancherCompose, stackConfig.getRancherCompose());
+        writeToFile(dockerCompose, encryptSecretsIfEncryptPasswordSet(stackConfig.getDockerCompose()));
+        writeToFile(rancherCompose, encryptSecretsIfEncryptPasswordSet(stackConfig.getRancherCompose()));
+    }
+
+    private String encryptSecretsIfEncryptPasswordSet(String value){
+        if(isEmptyOrNull(props.getEncryptPassword())){
+            return value;
+        }
+        return configEncryptionService.encryptSecrets(value);
     }
 
     private void writeToFile(File file, String value){

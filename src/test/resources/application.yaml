@@ -18,3 +18,5 @@ git-password: git-secret
 rancher-base-url: http://localhost:8080/v2
 rancher-account-key: rancher-admin
 rancher-secret-key: rancher-secret
+encrypt-salt: deadbeef
+encrypt-key-pattern: '(?i).*(password|secret|pass).*'

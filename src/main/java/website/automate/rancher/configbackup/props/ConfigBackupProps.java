@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties
 public class ConfigBackupProps {
 
+    private String encryptKeyPattern;
+
+    private String encryptSalt;
+
+    private String encryptPassword = "secrets";
+
     private String gitUser;
 
     private String gitPassword;
@@ -115,5 +121,29 @@ public class ConfigBackupProps {
 
     public void setGitFilePattern(String gitFilePattern) {
         this.gitFilePattern = gitFilePattern;
+    }
+
+    public String getEncryptPassword() {
+        return encryptPassword;
+    }
+
+    public void setEncryptPassword(String encryptPassword) {
+        this.encryptPassword = encryptPassword;
+    }
+
+    public String getEncryptSalt() {
+        return encryptSalt;
+    }
+
+    public void setEncryptSalt(String encryptSalt) {
+        this.encryptSalt = encryptSalt;
+    }
+
+    public String getEncryptKeyPattern() {
+        return encryptKeyPattern;
+    }
+
+    public void setEncryptKeyPattern(String encryptKeyPattern) {
+        this.encryptKeyPattern = encryptKeyPattern;
     }
 }

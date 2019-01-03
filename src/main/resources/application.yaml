@@ -12,3 +12,5 @@ git-author-name: rancher-config-backup
 git-author-email: noreply@automate.website
 git-repository-name: default
 git-repository-branch: master
+encrypt-salt: deadbeef
+encrypt-key-pattern: '(?i).*(password|secret|pass).*'
