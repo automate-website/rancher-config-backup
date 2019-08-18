@@ -16,8 +16,6 @@ import java.util.Map;
 @Service
 public class ConfigEncryptionService {
 
-    private static final String ENCRYPTION_PREFIX = "{encrypted}";
-
     private TextEncryptor encryptor;
 
     private ConfigBackupProps props;
@@ -51,18 +49,10 @@ public class ConfigEncryptionService {
             } else {
                 String key = field.getKey();
                 if(key.matches(props.getEncryptKeyPattern())){
-                    String valueStr = value.asText();
-                    // Encrypt only non encrypted values.
-                    if(!valueStr.startsWith(ENCRYPTION_PREFIX)){
-                        field.setValue(TextNode.valueOf(encrypt(valueStr)));
-                    }
+                    field.setValue(TextNode.valueOf(encryptor.encrypt(value.asText())));
                 }
             }
         }
-    }
-
-    private String encrypt(String value){
-        return ENCRYPTION_PREFIX + encryptor.encrypt(value);
     }
 
     private String serializeToYaml(JsonNode document){
