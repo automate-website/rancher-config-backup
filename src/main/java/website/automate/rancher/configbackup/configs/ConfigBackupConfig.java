@@ -25,6 +25,6 @@ public class ConfigBackupConfig {
         if(StringUtils.isEmptyOrNull(encryptPassword)){
             encryptPassword = "default";
         }
-        return Encryptors.text(encryptPassword, props.getEncryptSalt());
+        return Encryptors.queryableText(encryptPassword, props.getEncryptSalt());
     }
 }
